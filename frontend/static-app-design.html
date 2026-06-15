@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SoloLedger Static App Design</title>
+    <style>
+      :root {
+        --bg: #f7f9fc;
+        --card: #ffffff;
+        --ink: #101828;
+        --muted: #667085;
+        --line: #e4e7ec;
+        --primary: #1463ff;
+        --accent: #0f766e;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "Manrope", "Segoe UI", sans-serif;
+        background: radial-gradient(circle at top right, #dbe7ff 0, var(--bg) 40%);
+        color: var(--ink);
+      }
+      .wrap { max-width: 1200px; margin: 0 auto; padding: 24px; }
+      h1 { margin: 0 0 8px; font-size: 32px; }
+      p { margin: 0; color: var(--muted); }
+      .grid { display: grid; gap: 16px; margin-top: 20px; }
+      .hero { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 20px; }
+      .cards { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 16px;
+      }
+      .kpi { font-size: 26px; font-weight: 700; margin-top: 6px; }
+      .section-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+      .layout { grid-template-columns: 270px 1fr; align-items: start; }
+      .nav-item {
+        padding: 10px 12px; border-radius: 10px; margin-bottom: 8px; border: 1px solid transparent;
+      }
+      .nav-item.active { background: #eef4ff; border-color: #cad8ff; color: var(--primary); font-weight: 700; }
+      .chat {
+        border: 1px solid var(--line); border-radius: 14px; padding: 14px; background: #fcfdff; margin-bottom: 12px;
+      }
+      .bubble { border-radius: 12px; padding: 10px 12px; max-width: 75%; margin-bottom: 8px; }
+      .user { background: #eaf1ff; margin-left: auto; }
+      .bot { background: #f4f7fb; }
+      .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+      .chip { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 6px 10px; font-size: 12px; }
+      .chip.primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+      .list { display: grid; gap: 10px; }
+      .row { border: 1px solid var(--line); border-radius: 12px; padding: 12px; background: #fff; }
+      .foot {
+        margin-top: 18px; border-top: 1px solid var(--line); padding-top: 14px; font-size: 13px; color: var(--muted);
+      }
+      @media (max-width: 860px) {
+        .layout { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="hero">
+        <h1>SoloLedger Static Design</h1>
+        <p>Single-file static blueprint of the full app experience: Chat-first expense capture + workspace management.</p>
+      </div>
+
+      <div class="grid cards">
+        <div class="card"><div>Total Clients</div><div class="kpi">24</div></div>
+        <div class="card"><div>Open Invoices</div><div class="kpi">9</div></div>
+        <div class="card"><div>Monthly Expenses</div><div class="kpi">₹1,87,400</div></div>
+        <div class="card"><div>Recovery Rate</div><div class="kpi">82%</div></div>
+      </div>
+
+      <div class="grid layout">
+        <div class="card">
+          <div class="section-title">Navigation</div>
+          <div class="nav-item active">Chat</div>
+          <div class="nav-item">Library</div>
+          <div class="nav-item">Clients</div>
+          <div class="nav-item">Projects</div>
+          <div class="nav-item">Categories</div>
+          <div class="nav-item">Bills</div>
+          <div class="nav-item">Invoices</div>
+          <div class="nav-item">Profile</div>
+        </div>
+
+        <div class="card">
+          <div class="section-title">Chat Expense Flow</div>
+          <div class="chat">
+            <div class="bubble user">spent 5000 for textiles</div>
+            <div class="bubble bot">New expense detected: ₹5,000. I couldn’t confidently match this to an existing category.</div>
+            <div class="chips">
+              <div class="chip">Food</div><div class="chip">Software</div><div class="chip">Entertainment</div>
+              <div class="chip primary">Create "Textiles"</div>
+            </div>
+          </div>
+          <div class="chat">
+            <div class="bubble user">create category textiles</div>
+            <div class="bubble bot">Created category: Textiles. Expense filed under Textiles and included in monthly invoice.</div>
+            <div class="chips"><div class="chip primary">Raise now instead</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid cards">
+        <div class="card">
+          <div class="section-title">Projects (Manage)</div>
+          <div class="list">
+            <div class="row">Website Retainer · Active · ₹55,000</div>
+            <div class="row">Brand Revamp · Draft · ₹90,000</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="section-title">Categories (Manage)</div>
+          <div class="chips">
+            <div class="chip">Food</div><div class="chip">Software</div><div class="chip">Travel</div>
+            <div class="chip">Gifting</div><div class="chip">Textiles</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="section-title">Bills</div>
+          <div class="list">
+            <div class="row">Reliance Mart · ₹800 · Food · captured</div>
+            <div class="row">Employee Gift · ₹4,000 · Gifting · captured</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="section-title">Invoices</div>
+          <div class="list">
+            <div class="row">INV-3013C5B7 · ₹5,000 · draft</div>
+            <div class="row">INV-8C2EA011 · ₹42,300 · sent</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="foot">
+        File purpose: static UX/design reference only. No backend or runtime dependencies.
+      </div>
+    </div>
+  </body>
+</html>

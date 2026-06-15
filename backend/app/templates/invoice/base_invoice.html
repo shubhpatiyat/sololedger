@@ -1,0 +1,391 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <style>
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    :root {
+      --brand: {{ brand_color or '#7f93b3' }};
+      --bg1: #ffffff;
+      --bg2: #ffffff;
+      --text: #101828;
+      --muted: #475467;
+      --soft: #667085;
+      --line: #d0d5dd;
+      --header: #eef4ff;
+      --pill: #eef4ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: {{ font_family or "'Courier New', monospace" }};
+      color: var(--text);
+      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+      padding: 32px 40px 38px;
+      min-height: 1123px;
+    }
+
+    .page {
+      width: 100%;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .logo-wrap {
+      width: 66px;
+      height: 66px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #ffffff;
+      border: 1px solid #d0d5dd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 6px;
+      display: block;
+      background: #ffffff;
+    }
+
+    .logo-fallback {
+      width: 100%;
+      height: 100%;
+      background: var(--brand);
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .title-block {
+      text-align: right;
+      max-width: 52%;
+    }
+
+    .invoice-title {
+      margin: 0;
+      font-size: 42px;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .invoice-number {
+      margin: 10px 0 0;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .meta-row {
+      margin-top: 34px;
+      display: flex;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .left-meta,
+    .right-meta {
+      width: 48%;
+    }
+
+    .label {
+      margin: 0 0 8px;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--muted);
+      opacity: 0.95;
+    }
+
+    .party-name {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.2;
+      font-weight: 800;
+    }
+
+    .party-address {
+      margin: 6px 0 0;
+      font-size: 21px;
+      line-height: 1.35;
+      color: var(--text);
+    }
+
+    .right-meta {
+      text-align: right;
+      padding-top: 2px;
+    }
+
+    .date-balance-row {
+      margin-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 30px;
+    }
+
+    .date-box .value {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .balance-pill {
+      min-width: 300px;
+      padding: 12px 18px 10px;
+      border-radius: 999px;
+      background: var(--pill);
+      text-align: right;
+      margin-top: 8px;
+      border: 1px solid #d0d5dd;
+    }
+
+    .balance-pill .balance-label {
+      display: block;
+      font-size: 17px;
+      line-height: 1.1;
+      color: var(--soft);
+      font-weight: 700;
+    }
+
+    .balance-pill .balance-value {
+      display: block;
+      margin-top: 6px;
+      font-size: 20px;
+      line-height: 1.1;
+      color: #344054;
+      font-weight: 800;
+    }
+
+    .invoice-table-wrap {
+      margin-top: 30px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead tr {
+      background: var(--header);
+    }
+
+    th {
+      padding: 12px 14px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #344054;
+      text-align: left;
+    }
+
+    td {
+      padding: 14px;
+      font-size: 14px;
+      color: var(--text);
+      vertical-align: top;
+    }
+
+    td.right,
+    th.right {
+      text-align: right;
+    }
+
+    .col-num {
+      width: 50px;
+    }
+
+    .col-rate,
+    .col-amount {
+      width: 140px;
+    }
+
+    .desc-cell {
+      line-height: 1.45;
+      word-break: break-word;
+    }
+
+    .totals {
+      width: 42%;
+      margin-left: auto;
+      margin-top: 22px;
+    }
+
+    .totals-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin: 10px 0;
+      font-size: 16px;
+      line-height: 1.2;
+    }
+
+    .totals-row strong {
+      font-weight: 800;
+    }
+
+    .totals-row.total {
+      margin-top: 14px;
+      font-size: 26px;
+      font-weight: 800;
+    }
+
+    .payment-section {
+      margin-top: 30px;
+    }
+
+    .payment-title {
+      margin: 0 0 10px;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .payment-text {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.4;
+      color: var(--text);
+    }
+
+    .notes-section {
+      margin-top: 22px;
+    }
+
+    .notes-title {
+      margin: 0 0 8px;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .notes-text {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="topbar">
+      <div class="logo-wrap">
+        {% if logo_url %}
+          <img src="{{ logo_url }}" alt="Logo" class="logo" />
+        {% else %}
+          <div class="logo-fallback">SL</div>
+        {% endif %}
+      </div>
+
+      <div class="title-block">
+        <h1 class="invoice-title">{{ invoice_title or 'TAX INVOICE' }}</h1>
+        <p class="invoice-number">{{ invoice_number }}</p>
+      </div>
+    </div>
+
+    <div class="meta-row">
+      <div class="left-meta">
+        <p class="label">From</p>
+        <p class="party-name">{{ from_name }}</p>
+        <p class="party-address">{{ from_address }}</p>
+      </div>
+
+      <div class="right-meta">
+        <p class="label">Bill To</p>
+        <p class="party-name">{{ to_name }}</p>
+        <p class="party-address">{{ to_address }}</p>
+      </div>
+    </div>
+
+    <div class="date-balance-row">
+      <div class="date-box">
+        <p class="label">Invoice Date</p>
+        <div class="value">{{ invoice_date }}</div>
+      </div>
+
+      <div class="balance-pill">
+        <span class="balance-label">{{ balance_label or 'Balance due' }}</span>
+        <span class="balance-value">{{ balance_due }}</span>
+      </div>
+    </div>
+
+    <div class="invoice-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="col-num">#</th>
+            <th>Description</th>
+            <th class="right col-rate">Rate</th>
+            <th class="right col-amount">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in items %}
+          <tr>
+            <td>{{ loop.index }}</td>
+            <td class="desc-cell">{{ item.description }}</td>
+            <td class="right">{{ item.rate }}</td>
+            <td class="right">{{ item.amount }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="totals">
+      <div class="totals-row">
+        <span>Sub total</span>
+        <span>{{ sub_total }}</span>
+      </div>
+
+      {% if show_tax %}
+      <div class="totals-row">
+        <span>{{ tax_label or 'IGST (18%)' }}</span>
+        <span>{{ tax_amount }}</span>
+      </div>
+      {% endif %}
+
+      <div class="totals-row total">
+        <strong>Total</strong>
+        <strong>{{ total_amount }}</strong>
+      </div>
+    </div>
+
+    {% if payment_details %}
+    <div class="payment-section">
+      <h3 class="payment-title">Payment details</h3>
+      <p class="payment-text">{{ payment_details }}</p>
+    </div>
+    {% endif %}
+
+    {% if show_notes and notes_text %}
+    <div class="notes-section">
+      <h3 class="notes-title">Notes</h3>
+      <p class="notes-text">{{ notes_text }}</p>
+    </div>
+    {% endif %}
+  </div>
+</body>
+</html>

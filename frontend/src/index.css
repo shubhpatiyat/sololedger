@@ -1,0 +1,212 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 212 48% 8%;
+    --foreground: 210 40% 98%;
+    --card: 212 40% 11%;
+    --card-foreground: 210 40% 98%;
+    --popover: 212 40% 11%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 204 76% 41%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 212 32% 18%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 212 32% 18%;
+    --muted-foreground: 214 15% 70%;
+    --accent: 212 32% 18%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 212 28% 22%;
+    --input: 212 28% 22%;
+    --ring: 204 76% 41%;
+    --radius: 0.75rem;
+    --chat-input: 212 40% 11%;
+    --chat-input-border: 212 28% 22%;
+    --chat-bubble-user: 204 76% 41%;
+    --chat-bubble-bot: 212 34% 15%;
+    --sidebar-bg: 212 48% 8%;
+    --gradient-primary: linear-gradient(135deg, hsl(204 76% 41%), hsl(202 62% 61%));
+    --gradient-card: linear-gradient(145deg, hsl(212 40% 11%), hsl(212 34% 14%));
+    --gradient-header: linear-gradient(90deg, hsl(212 48% 8%), hsl(212 44% 11%));
+
+    --sidebar-background: 212 48% 8%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 204 76% 41%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 212 32% 18%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 212 28% 22%;
+    --sidebar-ring: 204 76% 41%;
+    --profile-avatar-bg: 204 76% 41%;
+    --profile-avatar-text: 210 40% 98%;
+    --selected-chat-bg: 212 40% 11%;
+    --selected-chat-text: 0 0% 98%;
+    --selected-chat-border: 204 76% 41%;
+  }
+
+  /* Light theme (explicit class to ensure toggling) */
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 210 40% 2%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 40% 2%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 40% 2%;
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 210 40% 8%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 210 40% 8%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 221 83% 53%;
+    --chat-input: 0 0% 100%;
+    --chat-input-border: 214 32% 91%;
+    --chat-bubble-user: 221 83% 53%;
+    --chat-bubble-bot: 210 40% 96%;
+    --sidebar-bg: 0 0% 98%;
+    --bg-sidebar: 0 0% 98%;
+    --gradient-primary: linear-gradient(135deg, hsl(221 83% 53%), hsl(221 83% 63%));
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%), hsl(210 40% 98%));
+    --gradient-header: linear-gradient(90deg, hsl(0 0% 98%), hsl(210 40% 98%));
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+    --profile-avatar-bg: 221 83% 53%;
+    --profile-avatar-text: 0 0% 100%;
+    --selected-chat-bg: 210 40% 96%;
+    --selected-chat-text: 210 40% 2%;
+    --selected-chat-border: 221 83% 53%;
+  }
+
+  /* Dark theme - SoloLedger style */
+  .dark {
+    --background: 210 30% 8%;
+    --foreground: 210 40% 95%;
+    
+    --card: 210 30% 12%;
+    --card-foreground: 210 40% 95%;
+    
+    --popover: 210 30% 12%;
+    --popover-foreground: 210 40% 95%;
+    
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 210 30% 16%;
+    --secondary-foreground: 210 40% 95%;
+    
+    --muted: 210 30% 16%;
+    --muted-foreground: 215 16% 65%;
+    
+    --accent: 210 30% 16%;
+    --accent-foreground: 210 40% 95%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 210 30% 18%;
+    --input: 210 30% 18%;
+    --ring: 221 83% 53%;
+    
+    --chat-input: 210 30% 12%;
+    --chat-input-border: 210 30% 20%;
+    --chat-bubble-user: 221 83% 53%;
+    --chat-bubble-bot: 210 30% 16%;
+    --sidebar-bg: 210 30% 10%;
+    
+    --gradient-primary: linear-gradient(135deg, hsl(221 83% 53%), hsl(221 83% 63%));
+    --gradient-card: linear-gradient(135deg, hsl(210 30% 12%), hsl(210 30% 16%));
+  }
+
+  /* Blue theme */
+  .theme-blue {
+    --primary: 214 95% 58%;
+    --chat-bubble-user: 214 95% 58%;
+    --ring: 214 95% 58%;
+    --gradient-primary: linear-gradient(135deg, hsl(214 95% 58%), hsl(214 95% 68%));
+  }
+
+  /* Green theme */
+  .theme-green {
+    --primary: 142 76% 36%;
+    --chat-bubble-user: 142 76% 36%;
+    --ring: 142 76% 36%;
+    --gradient-primary: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 76% 46%));
+  }
+
+  /* Gray theme */
+  .theme-gray {
+    --primary: 215 25% 27%;
+    --chat-bubble-user: 215 25% 27%;
+    --ring: 215 25% 27%;
+    --gradient-primary: linear-gradient(135deg, hsl(215 25% 27%), hsl(215 25% 37%));
+  }
+
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Segoe UI", "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  }
+}
+
+@layer utilities {
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted));
+    border-radius: 2px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.5);
+  }
+}
+
+#lovable-badge {
+  display: none !important;
+}
